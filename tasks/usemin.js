@@ -156,6 +156,7 @@ module.exports = function (grunt) {
     var dest = options.dest || 'dist';
     var staging = options.staging || '.tmp';
     var root = options.root;
+    var srcStrip = options.srcStrip;
 
     grunt.log
       .writeln('Going through ' + grunt.log.wordlist(this.filesSrc) + ' to update the config')
@@ -166,7 +167,8 @@ module.exports = function (grunt) {
     var c = new ConfigWriter(flow, {
       root: root,
       dest: dest,
-      staging: staging
+      staging: staging,
+      srcStrip: srcStrip
     });
 
     var cfgNames = [];
@@ -182,6 +184,7 @@ module.exports = function (grunt) {
     });
 
     this.filesSrc.forEach(function (filepath) {
+
       var config;
       try {
         config = c.process(filepath, grunt.config());

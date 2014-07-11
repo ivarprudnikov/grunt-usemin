@@ -61,7 +61,7 @@ describe('ConfigWriter', function () {
         concat: {
           generated: {
             files: [{
-              dest: '.tmp/concat/scripts/site.js',
+              dest: '.tmp/app/scripts/site.js',
               src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
             }]
           }
@@ -69,8 +69,8 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'dist/scripts/site.js',
-              src: ['.tmp/concat/scripts/site.js']
+              dest: 'dist/app/scripts/site.js',
+              src: ['.tmp/app/scripts/site.js']
             }]
           }
         }
@@ -97,7 +97,7 @@ describe('ConfigWriter', function () {
         concat: {
           generated: {
             files: [{
-              dest: '.tmp/concat/scripts/site.js',
+              dest: '.tmp/app/scripts/site.js',
               src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
             }]
           }
@@ -105,8 +105,8 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'destination/scripts/site.js',
-              src: ['.tmp/concat/scripts/site.js']
+              dest: 'destination/app/scripts/site.js',
+              src: ['.tmp/app/scripts/site.js']
             }]
           }
         }
@@ -133,7 +133,7 @@ describe('ConfigWriter', function () {
         concat: {
           generated: {
             files: [{
-              dest: 'staging/concat/scripts/site.js',
+              dest: 'staging/app/scripts/site.js',
               src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
             }]
           }
@@ -141,8 +141,8 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'dist/scripts/site.js',
-              src: ['staging/concat/scripts/site.js']
+              dest: 'dist/app/scripts/site.js',
+              src: ['staging/app/scripts/site.js']
             }]
           }
         }
@@ -169,7 +169,7 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'dist/scripts/site.js',
+              dest: 'dist/app/scripts/site.js',
               src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
             }]
           }
@@ -196,13 +196,13 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'staging/uglify/foo.js',
+              dest: 'staging/app/foo.js',
               src: ['app/foo.js']
             }, {
-              dest: 'staging/uglify/bar.js',
+              dest: 'staging/app/bar.js',
               src: ['app/bar.js']
             }, {
-              dest: 'staging/uglify/baz.js',
+              dest: 'staging/app/baz.js',
               src: ['app/baz.js']
             }]
           }
@@ -210,8 +210,8 @@ describe('ConfigWriter', function () {
         concat: {
           generated: {
             files: [{
-              dest: 'dist/scripts/site.js',
-              src: ['staging/uglify/foo.js', 'staging/uglify/bar.js', 'staging/uglify/baz.js']
+              dest: 'dist/app/scripts/site.js',
+              src: ['staging/app/foo.js', 'staging/app/bar.js', 'staging/app/baz.js']
             }]
           }
         }
@@ -243,7 +243,7 @@ describe('ConfigWriter', function () {
         concat: {
           generated: {
             files: [{
-              dest: '.tmp/concat/scripts/site.js',
+              dest: '.tmp/app/scripts/site.js',
               src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
             }]
           },
@@ -254,16 +254,19 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'destination/scripts/site.js',
-              src: ['.tmp/concat/scripts/site.js']
+              dest: 'destination/app/scripts/site.js',
+              src: ['.tmp/app/scripts/site.js']
             }]
           }
         }
       });
       assert.deepEqual(config, expected);
     });
+
     it('should allow for a flow per block type');
+
     it('should allow for an empty flow');
+
     it('should allow for a filename as input');
 
     it('should deduplicate blocks', function () {
@@ -284,7 +287,7 @@ describe('ConfigWriter', function () {
         concat: {
           generated: {
             files: [{
-              dest: '.tmp/concat/scripts/site.js',
+              dest: '.tmp/app/scripts/site.js',
               src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
             }]
           }
@@ -292,8 +295,8 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'dist/scripts/site.js',
-              src: ['.tmp/concat/scripts/site.js']
+              dest: 'dist/app/scripts/site.js',
+              src: ['.tmp/app/scripts/site.js']
             }]
           }
         }
@@ -319,7 +322,7 @@ describe('ConfigWriter', function () {
         concat: {
           generated: {
             files: [{
-              dest: '.tmp/concat/scripts/site.js',
+              dest: '.tmp/app/scripts/site.js',
               src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
             }]
           }
@@ -327,8 +330,8 @@ describe('ConfigWriter', function () {
         uglify: {
           generated: {
             files: [{
-              dest: 'dist/scripts/site.js',
-              src: ['.tmp/concat/scripts/site.js']
+              dest: 'dist/app/scripts/site.js',
+              src: ['.tmp/app/scripts/site.js']
             }]
           }
         }
