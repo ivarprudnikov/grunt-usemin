@@ -151,6 +151,117 @@ describe('ConfigWriter', function () {
       assert.deepEqual(config, expected);
     });
 
+    it('should allow removing one level of directory', function () {
+      var flow = new Flow({
+        steps: {
+          js: ['concat', 'uglifyjs']
+        }
+      });
+
+      var file = helpers.createFile('foo', 'app', blocks);
+      var c = new ConfigWriter(flow, {
+        srcStrip: 'app',
+        input: 'app',
+        dest: 'dist',
+        staging: 'staging'
+      });
+      var config = c.process(file);
+      var expected = helpers.normalize({
+        concat: {
+          generated: {
+            files: [{
+              dest: 'staging/scripts/site.js',
+              src: ['app/foo.js', 'app/bar.js', 'app/baz.js']
+            }]
+          }
+        },
+        uglify: {
+          generated: {
+            files: [{
+              dest: 'dist/scripts/site.js',
+              src: ['staging/scripts/site.js']
+            }]
+          }
+        }
+      });
+
+      assert.deepEqual(config, expected);
+    });
+
+    it('should allow removing parts of directory', function () {
+      var flow = new Flow({
+        steps: {
+          js: ['concat', 'uglifyjs']
+        }
+      });
+
+      var file = helpers.createFile('foo', 'app/in/some/dir', blocks);
+      var c = new ConfigWriter(flow, {
+        srcStrip: 'app/in',
+        input: 'app',
+        dest: 'dist',
+        staging: 'staging'
+      });
+      var config = c.process(file);
+      var expected = helpers.normalize({
+        concat: {
+          generated: {
+            files: [{
+              dest: 'staging/some/dir/scripts/site.js',
+              src: ['app/in/some/dir/foo.js', 'app/in/some/dir/bar.js', 'app/in/some/dir/baz.js']
+            }]
+          }
+        },
+        uglify: {
+          generated: {
+            files: [{
+              dest: 'dist/some/dir/scripts/site.js',
+              src: ['staging/some/dir/scripts/site.js']
+            }]
+          }
+        }
+      });
+
+      assert.deepEqual(config, expected);
+    });
+
+    it('should allow removing middle parts of directory', function () {
+      var flow = new Flow({
+        steps: {
+          js: ['concat', 'uglifyjs']
+        }
+      });
+
+      var file = helpers.createFile('foo', 'app/in/some/dir', blocks);
+      var c = new ConfigWriter(flow, {
+        srcStrip: 'in/some',
+        input: 'app',
+        dest: 'dist',
+        staging: 'staging'
+      });
+      var config = c.process(file);
+      var expected = helpers.normalize({
+        concat: {
+          generated: {
+            files: [{
+              dest: 'staging/app/dir/scripts/site.js',
+              src: ['app/in/some/dir/foo.js', 'app/in/some/dir/bar.js', 'app/in/some/dir/baz.js']
+            }]
+          }
+        },
+        uglify: {
+          generated: {
+            files: [{
+              dest: 'dist/app/dir/scripts/site.js',
+              src: ['staging/app/dir/scripts/site.js']
+            }]
+          }
+        }
+      });
+
+      assert.deepEqual(config, expected);
+    });
+
     it('should allow for single step flow', function () {
       var flow = new Flow({
         steps: {
